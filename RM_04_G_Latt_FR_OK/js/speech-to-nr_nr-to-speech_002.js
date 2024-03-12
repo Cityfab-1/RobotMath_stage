@@ -19,8 +19,10 @@ const SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammar
 const SpeechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
 //Defining the grammar
-var numbers = Array(10000).fill().map((x, i) => i);
-var grammar = '#JSGF V1.0; grammar numbers; public <numbers.digits> = ' + numbers.join(' | ') + ' ;';
+const numbers = Array(10000).fill().map((x, i) => i);
+let numbersString = numbers.map(String);
+console.log(numbersString);
+let grammar = '#JSGF V1.0; grammar numbers; public <numbers.digits> = ' + numbersString.join(' | ') + ' ;';
 
 //Instancing speech recognition and grammarlist
 var recognition = new SpeechRecognition();
@@ -58,13 +60,13 @@ recognition.onspeechend = () => {
 recognition.onnomatch = () => {
     recognition.stop();
     document.getElementById("IDmathResult").innerHTML = "Je n'ai pas reconnu ce numéro. S'il vous plaît, donnez-moi un nouveau numéro !";
-    //speak();
+    textToSpeech();
 };
-recognition.onerror = () => {
+recognition.onerror = (event) => {
     recognition.stop();
     document.getElementById("IDmathResult").innerHTML = "Une erreur s'est produite lors de la reconnaissance.";
+    console.log(`An error has occured with the speech synthesis: ${event.error}`)
     textToSpeech();
-    //speak();
 };
 recognition.onresult = (event) => {
     //catch results in variable
@@ -79,6 +81,7 @@ recognition.onresult = (event) => {
 
     //Pastes the X value into the formula
     document.getElementById('IDValueX').value = valueXStudent;
+    textToSpeech();
 }
 
 //Math functions
@@ -164,6 +167,4 @@ async function fillVoicesList() {
     document.getElementById('IDvoiceSelect').selectedIndex = 138;
 
 }
-
-
 
