@@ -46,6 +46,9 @@ if (synth.onvoiceschanged !== undefined) {
     synth.onvoiceschanged = getVoices;
 }
 
+// ++++++++++++++++++++++++++++++ SPEECH TO NUMBER ++++++++++++++++++++++++++++++++++ //
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
+
 //Listening event
 document.getElementById('ButtonListen').addEventListener('click', () => {
     recognition.start();
@@ -84,6 +87,9 @@ recognition.onresult = (event) => {
     textToSpeech();
 }
 
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
+  // ++++++++++++++++++++++++++++++ MATH ++++++++++++++++++++++++++++++++++ //
+
 //Math functions
 function calculateResult() {
     //Fetches the values from the input screen
@@ -94,6 +100,9 @@ function calculateResult() {
     mathResult.innerHTML = eval(valueX + operator.value + valueY);
     console.log(eval(valueX + operator.value + valueY));
 }
+
+// ++++++++++++++++++++++++++++++ NUMBER TO SPEECH ++++++++++++++++++++++++++++++++++ //
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 //Text-to-speech
 function textToSpeech() {
